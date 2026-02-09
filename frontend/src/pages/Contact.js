@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
+import API_BASE_URL from '../apiConfig';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate required fields
     if (!formData.fullName.trim() || !formData.email.trim()) {
       alert('❌ Please fill in all required fields (Name and Email)');
@@ -31,7 +32,7 @@ const Contact = () => {
     }
 
     setIsSubmitting(true);
-    
+
     try {
       console.log('Submitting form data:', {
         fullName: formData.fullName,
@@ -42,7 +43,7 @@ const Contact = () => {
         message: formData.message
       });
 
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +80,7 @@ const Contact = () => {
 📅 Submitted: ${new Date(data.data.createdAt).toLocaleString()}
 
 Thank you for contacting Cognix AI! ✨`);
-        
+
         // Reset form
         setFormData({
           fullName: '',
@@ -95,7 +96,7 @@ Thank you for contacting Cognix AI! ✨`);
 
     } catch (error) {
       console.error('Contact form submission error:', error);
-      
+
       if (error.message.includes('Failed to fetch')) {
         alert('❌ Cannot connect to server. Please check if the backend is running on port 5000.');
       } else if (error.message.includes('NetworkError')) {
@@ -158,7 +159,7 @@ Thank you for contacting Cognix AI! ✨`);
         {/* Background Effects */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-500/20 rounded-full filter blur-3xl animate-bounce-slow"></div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -172,17 +173,17 @@ Thank you for contacting Cognix AI! ✨`);
             </span>
             <span className="ml-2 sm:ml-3 text-2xl sm:text-4xl md:text-6xl">🚀</span>
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8 px-4 text-center"
           >
-            We're here to help you transform your business with AI-powered solutions. 
+            We're here to help you transform your business with AI-powered solutions.
             Let's discuss your project and bring your vision to life! ✨💡
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -225,13 +226,13 @@ Thank you for contacting Cognix AI! ✨`);
                 <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-base sm:text-xl animate-pulse">💫</div>
                 <div className="absolute top-1/2 right-1 sm:right-2 text-sm sm:text-lg animate-ping">🌟</div>
                 <div className="absolute bottom-1/2 left-1 sm:left-2 text-xs sm:text-sm animate-bounce">💎</div>
-                
+
                 <div className="flex items-center gap-2 sm:gap-3 mb-2">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Send us a Message</h2>
                   <span className="text-xl sm:text-2xl lg:text-3xl animate-bounce">📝</span>
                 </div>
                 <p className="text-sm sm:text-base text-gray-400 mb-6 sm:mb-8">Fill out the form below and our team will get back to you within 24 hours! 🚀💌</p>
-                
+
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <motion.div
@@ -249,7 +250,7 @@ Thank you for contacting Cognix AI! ✨`);
                         className="w-full pl-12 pr-4 py-4 bg-gray-800/50 border border-gray-700/50 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500/50 focus:bg-gray-800/70 transition-all duration-300"
                       />
                     </motion.div>
-                    
+
                     <motion.div
                       whileFocus={{ scale: 1.02 }}
                       className="relative group"
@@ -266,7 +267,7 @@ Thank you for contacting Cognix AI! ✨`);
                       />
                     </motion.div>
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <motion.div
                       whileFocus={{ scale: 1.02 }}
@@ -282,7 +283,7 @@ Thank you for contacting Cognix AI! ✨`);
                         className="w-full pl-12 pr-4 py-4 bg-gray-800/50 border border-gray-700/50 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500/50 focus:bg-gray-800/70 transition-all duration-300"
                       />
                     </motion.div>
-                    
+
                     <motion.div
                       whileFocus={{ scale: 1.02 }}
                       className="relative group"
@@ -298,7 +299,7 @@ Thank you for contacting Cognix AI! ✨`);
                       />
                     </motion.div>
                   </div>
-                  
+
                   <motion.div
                     whileFocus={{ scale: 1.02 }}
                     className="relative group"
@@ -316,7 +317,7 @@ Thank you for contacting Cognix AI! ✨`);
                       ))}
                     </select>
                   </motion.div>
-                  
+
                   <motion.div
                     whileFocus={{ scale: 1.02 }}
                     className="relative group"
@@ -331,7 +332,7 @@ Thank you for contacting Cognix AI! ✨`);
                       className="w-full pl-12 pr-4 py-4 bg-gray-800/50 border border-gray-700/50 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500/50 focus:bg-gray-800/70 transition-all duration-300 resize-none"
                     />
                   </motion.div>
-                  
+
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
@@ -341,7 +342,7 @@ Thank you for contacting Cognix AI! ✨`);
                   >
                     {/* Animated background */}
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
+
                     {/* Button content */}
                     <div className="relative z-10 flex items-center gap-3">
                       {isSubmitting ? (
@@ -358,10 +359,10 @@ Thank you for contacting Cognix AI! ✨`);
                         </>
                       )}
                     </div>
-                    
+
                     {/* Sparkle effects */}
                     <div className="absolute top-1 right-2 w-1 h-1 bg-white rounded-full animate-ping opacity-75"></div>
-                    <div className="absolute bottom-1 left-2 w-1 h-1 bg-white rounded-full animate-ping opacity-50" style={{animationDelay: '0.5s'}}></div>
+                    <div className="absolute bottom-1 left-2 w-1 h-1 bg-white rounded-full animate-ping opacity-50" style={{ animationDelay: '0.5s' }}></div>
                   </motion.button>
                 </form>
               </div>
@@ -387,14 +388,14 @@ Thank you for contacting Cognix AI! ✨`);
                 >
                   {/* Hover effect background */}
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
+
                   {/* Floating emoji */}
                   <div className="absolute top-2 right-2 text-lg opacity-50 group-hover:opacity-100 transition-opacity duration-300">
                     {info.emoji}
                   </div>
-                  
+
                   <div className="relative z-10 flex items-start gap-4">
-                    <motion.div 
+                    <motion.div
                       whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                       className={`p-3 bg-gradient-to-r ${info.gradient} rounded-xl shadow-lg`}
@@ -428,7 +429,7 @@ Thank you for contacting Cognix AI! ✨`);
               >
                 {/* Decorative emoji */}
                 <div className="absolute top-2 right-2 text-lg animate-pulse">🌟</div>
-                
+
                 <div className="flex items-center gap-2 mb-4">
                   <h3 className="text-lg font-semibold text-white">Connect With Us</h3>
                   <span className="text-xl">🤝</span>

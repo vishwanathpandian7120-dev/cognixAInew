@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
 import Logo from './Logo.jsx';
+import API_BASE_URL from '../apiConfig';
 
 const DarkFooter = () => {
   const [email, setEmail] = useState('');
@@ -17,14 +18,14 @@ const DarkFooter = () => {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/newsletter/subscribe', {
+      const response = await fetch(`${API_BASE_URL}/api/newsletter/subscribe`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          email, 
-          source: 'footer' 
+        body: JSON.stringify({
+          email,
+          source: 'footer'
         }),
       });
 
@@ -112,7 +113,7 @@ const DarkFooter = () => {
                   <Logo size="large" showText={true} animated={true} />
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-                  Trusted by startups and technology-led organizations for delivering 
+                  Trusted by startups and technology-led organizations for delivering
                   future-ready digital solutions powered by artificial intelligence.
                 </p>
               </div>
@@ -165,7 +166,7 @@ const DarkFooter = () => {
                   </div>
                 ))}
               </div>
-              
+
               {/* Services */}
               <div className="mt-6">
                 <h5 className="text-md font-medium text-white mb-3">Our Services</h5>
@@ -185,7 +186,7 @@ const DarkFooter = () => {
             {/* Newsletter & Social */}
             <motion.div variants={itemVariants}>
               <h4 className="text-lg font-semibold text-white mb-6">Stay Connected</h4>
-              
+
               {/* Newsletter */}
               <div className="mb-6">
                 <p className="text-gray-400 text-sm mb-4">
@@ -260,7 +261,7 @@ const DarkFooter = () => {
             <div className="text-gray-500 text-sm">
               © 2026 Cognix AI. All Rights Reserved.
             </div>
-            
+
             <div className="flex items-center gap-6 text-sm">
               <Link to="/privacy" className="text-gray-500 hover:text-purple-400 transition-colors duration-300">
                 Privacy Policy

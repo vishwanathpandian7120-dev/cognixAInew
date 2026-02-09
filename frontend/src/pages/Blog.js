@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Calendar, 
-  Clock, 
-  Search, 
+import {
+  Calendar,
+  Clock,
+  Search,
   ArrowRight,
   BookOpen,
   Eye,
   MessageCircle,
   X
 } from 'lucide-react';
+import API_BASE_URL from '../apiConfig';
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -40,14 +41,14 @@ const Blog = () => {
     setNewsletterMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/newsletter/subscribe', {
+      const response = await fetch(`${API_BASE_URL}/api/newsletter/subscribe`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          email: newsletterEmail, 
-          source: 'blog' 
+        body: JSON.stringify({
+          email: newsletterEmail,
+          source: 'blog'
         }),
       });
 
@@ -584,8 +585,8 @@ const Blog = () => {
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -606,7 +607,7 @@ const Blog = () => {
         {/* Background Effects */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-500/20 rounded-full filter blur-3xl animate-bounce-slow"></div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -619,17 +620,17 @@ const Blog = () => {
               Resources
             </span>
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-xl text-gray-300 max-w-4xl mx-auto mb-8"
           >
-            Stay ahead of the curve with our latest insights on AI, SEO, web development, and digital transformation. 
+            Stay ahead of the curve with our latest insights on AI, SEO, web development, and digital transformation.
             Expert knowledge to power your business growth.
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -785,11 +786,10 @@ const Blog = () => {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 whitespace-nowrap ${
-                    selectedCategory === category
+                  className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 whitespace-nowrap ${selectedCategory === category
                       ? 'bg-purple-600 text-white'
                       : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50'
-                  }`}
+                    }`}
                 >
                   {category}
                 </button>
@@ -968,7 +968,7 @@ const Blog = () => {
           </motion.div>
         </div>
       </section>
-      
+
       {/* Article Modal */}
       <AnimatePresence>
         {isArticleModalOpen && selectedArticle && (
@@ -994,7 +994,7 @@ const Blog = () => {
                   className="w-full h-64 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                
+
                 {/* Close Button */}
                 <button
                   onClick={closeArticle}
@@ -1002,7 +1002,7 @@ const Blog = () => {
                 >
                   <X className="w-5 h-5" />
                 </button>
-                
+
                 {/* Article Meta */}
                 <div className="absolute bottom-6 left-6 right-6">
                   <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r ${selectedArticle.gradient} text-white mb-3`}>
@@ -1038,14 +1038,14 @@ const Blog = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Article Content */}
               <div className="p-8 overflow-y-auto max-h-[calc(90vh-300px)]">
-                <div 
+                <div
                   className="prose prose-invert prose-lg max-w-none article-content"
                   dangerouslySetInnerHTML={{ __html: selectedArticle.content }}
                 />
-                
+
                 {/* Article Footer */}
                 <div className="mt-12 pt-8 border-t border-gray-800">
                   {/* Tags */}
@@ -1062,7 +1062,7 @@ const Blog = () => {
                       ))}
                     </div>
                   </div>
-                  
+
                   {/* Article Stats */}
                   <div className="flex items-center justify-center">
                     <div className="flex items-center gap-4 text-gray-400 text-sm">
