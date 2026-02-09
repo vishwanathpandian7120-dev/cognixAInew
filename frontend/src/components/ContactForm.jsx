@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Button from './ui/Button';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://cognixainew.onrender.com';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({

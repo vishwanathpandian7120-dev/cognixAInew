@@ -37,7 +37,7 @@ const connectDB = async () => {
     const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/cognixai', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      family: 4, // Force IPv4 to avoid EHOSTUNREACH with DNS64/IPv6
+      // Removed family: 4 to allow cloud providers (like Render) to use IPv6 if required
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 45000,
       connectTimeoutMS: 30000,
