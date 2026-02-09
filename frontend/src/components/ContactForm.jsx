@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Button from './ui/Button';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -21,7 +23,7 @@ const ContactForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/contact', formData);
+      await axios.post(`${API_BASE_URL}/api/contact`, formData);
       setStatus({ type: 'success', message: 'Thanks! We will respond shortly.' });
       setFormData({ fullName: '', email: '', phone: '', companyName: '', serviceInterested: '', message: '' });
     } catch (error) {
@@ -33,9 +35,8 @@ const ContactForm = () => {
     <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
       {status && (
         <div
-          className={`md:col-span-2 rounded-2xl px-4 py-3 text-sm font-semibold ${
-            status.type === 'success' ? 'bg-emerald-500/20 text-emerald-200' : 'bg-rose-500/20 text-rose-200'
-          }`}
+          className={`md:col-span-2 rounded-2xl px-4 py-3 text-sm font-semibold ${status.type === 'success' ? 'bg-emerald-500/20 text-emerald-200' : 'bg-rose-500/20 text-rose-200'
+            }`}
         >
           {status.message}
         </div>
