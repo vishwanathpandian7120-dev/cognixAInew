@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../apiConfig';
 import Button from './ui/Button';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://cognixainew.onrender.com';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
