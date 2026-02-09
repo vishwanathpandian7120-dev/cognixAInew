@@ -87,6 +87,17 @@ mongoose.connection.on('reconnected', () => {
 });
 
 // Routes
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Cognix AI Backend API is running!',
+    status: 'Live',
+    endpoints: {
+      health: '/api/health',
+      dbStatus: '/api/db-status'
+    }
+  });
+});
+
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/testimonials', require('./routes/testimonials'));
 app.use('/api/projects', require('./routes/projects'));
